@@ -5,5 +5,6 @@ declare namespace NodeJS {
 		PORT: string;
 		API_KEY: string;
 		API_URL: string;
+		BOT_TOKEN: string;
 	}
 }

@@ -25,4 +25,4 @@ client.on("message", async (msg: Discord.Message) => {
 	msg.reply(`Cryptocurrency with ticker ${command} has a price of $${price}`);
 });
 
-client.login("token");
+client.login(process.env.BOT_TOKEN);
