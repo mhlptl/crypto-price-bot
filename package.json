@@ -3,15 +3,16 @@
 	"version": "1.0.0",
 	"description": "",
 	"scripts": {
-		"start": "node src/index.ts",
+		"build": "tsc",
+		"prebuild": "npm run clean",
+		"start": "node dist/index.js",
 		"lint": "eslint .",
 		"lint:fix": "eslint --fix .",
 		"format": "prettier --check .",
 		"format:fix": "prettier --write .",
-		"clean": "rimraf dist/*/**",
+		"clean": "rimraf dist/**/*",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"prepare": "husky install",
-		"start:dev": "ts-node -r dotenv/config src/index.ts"
+		"prepare": "husky install"
 	},
 	"repository": {
 		"type": "git",

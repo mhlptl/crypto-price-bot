@@ -5,8 +5,20 @@ const client = new Discord.Client();
 
 const prefix = "$";
 
+const help = `
+These are the commands the Crypto Price Bot knows:
+$TICKER will return the current price of the crytocurrency with the ticker Ticker (i.e. $BTC will return the current price of Bitcoin)\n 
+`;
+
 client.on("message", async (msg: Discord.Message) => {
-	if (msg.author.bot || !msg.content.startsWith(prefix)) return;
+	if (msg.author.bot) return;
+
+	if (msg.content.toLowerCase() === "crypto help") {
+		msg.channel.send(help);
+		return;
+	}
+
+	if (!msg.content.startsWith(prefix)) return;
 
 	const commandBody = msg.content.slice(prefix.length);
 	const command = commandBody.split(" ").shift()?.toUpperCase();
@@ -15,7 +27,7 @@ client.on("message", async (msg: Discord.Message) => {
 		msg.reply("Please use a valid tag");
 		return;
 	}
-	// call api to get price
+
 	const price = await getPrice(command);
 
 	if (price === -1) {
