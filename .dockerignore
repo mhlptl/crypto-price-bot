@@ -1,0 +1,13 @@
+.editorconfig
+
+.env
+.env.development
+.env.production
+
+node_modules/
+
+.github/
+.husky/
+
+dist/**/*
+
