@@ -3,27 +3,30 @@ on:
   push:
     branches:
       - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout files
       - uses: actions/checkout@v2
+
       - name: Build image
       - run: docker build -t mhlptl/crypto-price-bot .
+
       - name: Push Docker images
       - uses: digitalocean/action-doctl@v2
-      - with:
+        with:
           token: ${{secrets.DOAT}}
+      
       - name: Log into DO Container Registry
         run: doctl registry login --expiry-seconds 600
+
       - name: Tag Image
         run: 
           docker tag mhlptl/crypto-price-bot \
           ${{secrets.REGISTRY}}/crypto-price-bot
+      
       - name: Push to Registry
         run: docker push ${{secrets.REGISTRY}}/crpyto-price-bot
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-
+        
