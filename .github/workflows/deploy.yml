@@ -14,7 +14,7 @@ jobs:
       - name: Build image
         run: docker build -t mhlptl/crypto-price-bot .
 
-      - name: Push Docker images
+      - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
           token: ${{secrets.DOAT}}
@@ -23,8 +23,7 @@ jobs:
         run: doctl registry login --expiry-seconds 600
 
       - name: Tag Image
-        run: docker tag mhlptl/crypto-price-bot \
-          ${{secrets.REGISTRY}}/crypto-price-bot
+        run: docker tag mhlptl/crypto-price-bot ${{secrets.REGISTRY}}/mhlptl/crypto-price-bot
 
       - name: Push to Registry
-        run: docker push ${{secrets.REGISTRY}}/crpyto-price-bot
+        run: docker push ${{secrets.REGISTRY}}/mhlptl/crypto-price-bot
